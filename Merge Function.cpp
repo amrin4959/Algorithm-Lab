@@ -1,44 +1,41 @@
-#include<iostream>
-using namespace std;
-void quicksort(int number[25],int first,int last)
+void mergee(int arr[], int p, int q, int r)
 {
-    int i, j, pivot, temp;
-    if(first<last)
+    int n1 = q - p + 1;
+    int n2 = r - q;
+    int L[n1], M[n2];
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[p + i];
+    for (int j = 0; j < n2; j++)
+        M[j] = arr[q + 1 + j];
+    int i, j, k;
+    i = 0;
+    j = 0;
+    k = p;
+    while (i < n1 && j < n2)
     {
-        pivot=first;
-        i=first;
-        j=last;
-        while(i<j)
+        if (L[i] <= M[j])
         {
-            while(number[i]<=number[pivot]&&i<last)
-                i++;
-            while(number[j]>number[pivot])
-                j--;
-            if(i<j)
-            {
-                temp=number[i];
-                number[i]=number[j];
-                number[j]=temp;
-            }
+            arr[k] = L[i];
+            i++;
         }
-        temp=number[pivot];
-        number[pivot]=number[j];
-        number[j]=temp;
-        quicksort(number,first,j-1);
-        quicksort(number,j+1,last);
+        else
+        {
+            arr[k] = M[j];
+            j++;
+        }
+        k++;
     }
-}
-int main()
-{
-    int i, n, number[25];
-    cout<<"How many elements are you going to enter?: ";
-    cin>>n;
-    cout<<"Enter elements: ";
-    for(i=0; i<n; i++)
-        cin>>number[i];
-    quicksort(number,0,n-1);
-    cout<<"Order of Sorted elements: ";
-    for(i=0; i<n; i++)
-        cout<<number[i]<<" ";
-    return 0;
+    while (i < n1)
+    {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2)
+    {
+        arr[k] = M[j];
+        j++;
+        k++;
+    }
 }
