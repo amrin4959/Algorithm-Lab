@@ -1,1 +1,1 @@
-# Algorithm-Lab-CSE266
+# Algorithm-Lab
